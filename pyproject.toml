@@ -1,0 +1,20 @@
+[project]
+name = "actions"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { email = "palliyanashabarish004@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "deepeval>=4.2.6",
+    "langchain-ollama>=1.1.0",
+]
+
+[project.scripts]
+actions = "actions:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
