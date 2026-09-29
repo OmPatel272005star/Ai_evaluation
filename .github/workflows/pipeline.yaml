@@ -12,7 +12,6 @@ jobs:
   evaluate-ai-skill:
     runs-on: self-hosted
 
-    # Fix Unicode encoding issues on Windows
     env:
       PYTHONIOENCODING: utf-8
       PYTHONUTF8: "1"
@@ -28,13 +27,22 @@ jobs:
           [Console]::InputEncoding = [System.Text.UTF8Encoding]::new()
 
       - name: Check Python version
-        run: python --version
+        run: |
+          python --version
+          python -m pip --version
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install "portalocker[win32]"
+          python -m pip install -r requirements.txt
+          python -m pip install deepeval
+          python -m pip install "portalocker[win32]"
+
+      - name: Verify DeepEval
+        run: |
+          python -m pip show deepeval
+          deepeval --version
+          where.exe deepeval
 
       - name: Check Ollama
         run: |
